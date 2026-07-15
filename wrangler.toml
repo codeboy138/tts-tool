@@ -1,6 +1,3 @@
-name = "tts-tool"
-main = "gemini-tts-worker.js"
-compatibility_date = "2026-07-15"
-
-[assets]
-directory = "."
+  name = "gemini-tts-worker"
+ *        main = "gemini-tts-worker.js"
+ *        compatibility_date = "2026-07-01"
