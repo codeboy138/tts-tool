@@ -163,19 +163,27 @@
                         <p class="text-xs text-gray-500 mt-1">속도/음높이는 슬라이더 대신, 텍스트 앞에 "천천히 차분하게 말해줘:" 같은 지시문을 붙여서 조절합니다 (Gemini TTS 특성).</p>
                     </div>
 
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label for="chunk-size" class="text-sm font-semibold text-gray-300">
+                                청크 최대 글자수 (긴 텍스트 자동 분할 기준)
+                            </label>
+                            <span id="chunk-size-val" class="text-xs font-mono bg-black border border-gray-500 text-white px-2 py-0.5">600자</span>
+                        </div>
+                        <input type="range" id="chunk-size" min="200" max="1500" step="50" value="600" class="w-full h-2 bg-gray-700 border border-gray-500 appearance-none cursor-pointer">
+                        <p class="text-xs text-gray-500 mt-1">텍스트가 이 글자수를 넘으면 문장 단위로 잘라 여러 개의 파일로 나눠 생성합니다.</p>
+                    </div>
+
                     <button id="btn-generate-cloud" class="w-full bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-4 border border-gray-400 transition-all duration-150 active:scale-95">
                         Generate (음성 생성)
                     </button>
 
                     <div id="cloud-status" class="text-sm text-gray-400"></div>
 
-                    <audio id="cloud-audio" controls class="w-full hidden"></audio>
-
-                    <a id="btn-download-cloud" href="#" download="tts_output.wav" class="hidden block text-center w-full bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-4 border border-gray-400 transition-all duration-150">
-                        다운로드 (WAV 파일)
-                    </a>
+                    <div id="cloud-results" class="space-y-3"></div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -328,14 +336,17 @@
             // Audio Flow Events
             utterance.onend = () => {
                 if (isPlayingFlag) {
-                    speakSentence(currentSentenceIndex + 1);
+                    // 온라인(Natural) 음성 엔진이 연속 요청을 처리하지 못해
+                    // synthesis-failed가 연쇄로 나는 것을 완화하기 위한 짧은 지연
+                    setTimeout(() => speakSentence(currentSentenceIndex + 1), 250);
                 }
             };
 
             utterance.onerror = (event) => {
                 console.error('TTS Playback Error:', event);
+                updateStatus('Error (' + event.error + ') - ' + (currentSentenceIndex + 1) + '/' + sentences.length + ' 문장 건너뜀');
                 if (event.error !== 'interrupted' && isPlayingFlag) {
-                    speakSentence(currentSentenceIndex + 1);
+                    setTimeout(() => speakSentence(currentSentenceIndex + 1), 250);
                 }
             };
 
@@ -344,10 +355,6 @@
         }
 
         function playTTS() {
-            if (synth.speaking) {
-                synth.cancel();
-            }
-
             const rawText = textInput.value;
             if (!rawText.trim()) {
                 alert('재생할 텍스트를 입력해주세요.');
@@ -356,7 +363,15 @@
 
             sentences = splitTextIntoSentences(rawText);
             isPlayingFlag = true;
-            speakSentence(0);
+
+            if (synth.speaking) {
+                synth.cancel();
+                // cancel 직후 바로 speak하면 온라인(Natural) 음성 엔진에서
+                // synthesis-failed가 발생하는 경우가 있어 짧게 지연 후 시작
+                setTimeout(() => speakSentence(0), 250);
+            } else {
+                speakSentence(0);
+            }
         }
 
         function pauseTTS() {
@@ -416,15 +431,86 @@
         // --- Google Gemini TTS (Cloudflare Worker 연동) ---
         const workerUrlInput = document.getElementById('worker-url');
         const geminiVoiceSelect = document.getElementById('gemini-voice-select');
+        const chunkSizeRange = document.getElementById('chunk-size');
+        const chunkSizeVal = document.getElementById('chunk-size-val');
         const btnGenerateCloud = document.getElementById('btn-generate-cloud');
         const cloudStatus = document.getElementById('cloud-status');
-        const cloudAudio = document.getElementById('cloud-audio');
-        const btnDownloadCloud = document.getElementById('btn-download-cloud');
+        const cloudResults = document.getElementById('cloud-results');
+
+        chunkSizeRange.addEventListener('input', () => {
+            chunkSizeVal.textContent = `${chunkSizeRange.value}자`;
+        });
+
+        // 문장 단위(splitTextIntoSentences)로 자른 뒤, maxChars를 넘지 않는 선에서
+        // 문장들을 그러모아 청크로 묶음. 문장 하나가 maxChars보다 길면 그 문장 하나만으로 청크 구성.
+        function splitTextIntoChunks(text, maxChars) {
+            const sentences = splitTextIntoSentences(text);
+            const chunks = [];
+            let current = '';
+
+            sentences.forEach(sentence => {
+                if (current && (current.length + sentence.length + 1) > maxChars) {
+                    chunks.push(current.trim());
+                    current = sentence;
+                } else {
+                    current = current ? current + ' ' + sentence : sentence;
+                }
+            });
+            if (current.trim()) chunks.push(current.trim());
+
+            return chunks;
+        }
+
+        async function generateOneChunk(workerUrl, text, voiceName) {
+            const response = await fetch(workerUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text, voiceName })
+            });
+
+            if (!response.ok) {
+                let errMsg = `요청 실패 (HTTP ${response.status})`;
+                try {
+                    const errJson = await response.json();
+                    if (errJson.error) errMsg += ` - ${errJson.error}`;
+                } catch (_) {}
+                throw new Error(errMsg);
+            }
+
+            return await response.blob();
+        }
+
+        function addResultRow(index, total) {
+            const row = document.createElement('div');
+            row.className = 'border border-gray-500 p-3 space-y-2';
+            row.innerHTML = `
+                <div class="text-xs text-gray-400">파일 ${index} / ${total} - 생성 중...</div>
+            `;
+            cloudResults.appendChild(row);
+            return row;
+        }
+
+        function fillResultRow(row, index, blobUrl, filename) {
+            row.innerHTML = `
+                <div class="text-xs text-gray-400">${filename}</div>
+                <audio controls class="w-full" src="${blobUrl}"></audio>
+                <a href="${blobUrl}" download="${filename}" class="block text-center w-full bg-black hover:bg-white hover:text-black text-white font-semibold py-2 px-4 border border-gray-400 transition-all duration-150">
+                    다운로드 (${filename})
+                </a>
+            `;
+        }
+
+        function failResultRow(row, index, message) {
+            row.innerHTML = `
+                <div class="text-xs text-red-400">파일 ${index} 생성 실패: ${message}</div>
+            `;
+        }
 
         btnGenerateCloud.addEventListener('click', async () => {
             const workerUrl = workerUrlInput.value.trim();
             const text = textInput.value.trim();
             const voiceName = geminiVoiceSelect.value;
+            const maxChars = parseInt(chunkSizeRange.value, 10);
 
             if (!workerUrl) {
                 cloudStatus.textContent = 'Worker 엔드포인트 URL을 입력해주세요.';
@@ -435,43 +521,30 @@
                 return;
             }
 
+            const chunks = splitTextIntoChunks(text, maxChars);
+            cloudResults.innerHTML = '';
             btnGenerateCloud.disabled = true;
-            cloudStatus.textContent = '음성 생성 중... (Gemini TTS 호출)';
-            cloudAudio.classList.add('hidden');
-            btnDownloadCloud.classList.add('hidden');
 
-            try {
-                const response = await fetch(workerUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text, voiceName })
-                });
+            for (let i = 0; i < chunks.length; i++) {
+                const num = i + 1;
+                const total = chunks.length;
+                const filename = `tts_output_${String(num).padStart(2, '0')}.wav`;
 
-                if (!response.ok) {
-                    let errMsg = `요청 실패 (HTTP ${response.status})`;
-                    try {
-                        const errJson = await response.json();
-                        if (errJson.error) errMsg += ` - ${errJson.error}`;
-                    } catch (_) {}
-                    throw new Error(errMsg);
+                cloudStatus.textContent = `생성 중... (${num}/${total})`;
+                const row = addResultRow(num, total);
+
+                try {
+                    const blob = await generateOneChunk(workerUrl, chunks[i], voiceName);
+                    const blobUrl = URL.createObjectURL(blob);
+                    fillResultRow(row, num, blobUrl, filename);
+                } catch (err) {
+                    console.error('Gemini TTS Error:', err);
+                    failResultRow(row, num, err.message);
                 }
-
-                const audioBlob = await response.blob();
-                const audioUrl = URL.createObjectURL(audioBlob);
-
-                cloudAudio.src = audioUrl;
-                cloudAudio.classList.remove('hidden');
-
-                btnDownloadCloud.href = audioUrl;
-                btnDownloadCloud.classList.remove('hidden');
-
-                cloudStatus.textContent = '생성 완료. 재생하거나 다운로드할 수 있습니다.';
-            } catch (err) {
-                console.error('Gemini TTS Error:', err);
-                cloudStatus.textContent = `오류: ${err.message}`;
-            } finally {
-                btnGenerateCloud.disabled = false;
             }
+
+            cloudStatus.textContent = `완료: 총 ${chunks.length}개 파일 생성됨.`;
+            btnGenerateCloud.disabled = false;
         });
 
         // Page Unload Protection
