@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome TTS Player - 영화 <눈동자> 리뷰</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 흑백 인트라넷 스타일 - Chrome/Edge 공통 */
+        :root {
+            color-scheme: dark;
+        }
+        input[type="range"] {
+            accent-color: #ffffff;
+        }
+        ::selection {
+            background: #ffffff;
+            color: #000000;
+        }
+    </style>
+</head>
+<body class="bg-black min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans text-white">
+
+    <div class="max-w-4xl mx-auto bg-black border border-gray-500">
+        <div class="bg-black border-b border-gray-500 p-6 text-white">
+            <h1 class="text-2xl font-bold">Chrome / Edge TTS Audio Player (TTS 오디오 플레이어)</h1>
+            <p class="text-gray-400 text-sm mt-1">Web Speech API를 이용한 고기능 텍스트 리더기</p>
+        </div>
+
+        <div class="p-6 space-y-6">
+            <div>
+                <label class="block text-sm font-semibold text-gray-300 mb-2">
+                    Speech Text (낭독할 텍스트)
+                </label>
+                <textarea id="text-input" rows="10" class="w-full p-4 bg-black border border-gray-500 text-white text-sm leading-relaxed resize-y focus:outline-none focus:border-white">여러분, 극장에서 옆자리 관객이 저도 모르게 낮은 탄식을 내뱉는 장면, 본 적 있으세요? 저는 이 영화에서 봤습니다. 오늘 리뷰할 영화는 개봉 3주 차에 접어들었는데도 오히려 관객수가 늘고 있는 화제작, <눈동자>입니다.
+
+먼저 간단히 줄거리부터 정리하고 갈게요. 유전병으로 서서히 시력을 잃어가는 사진작가 서진. 그런데 자신보다 먼저 시각장애를 갖고도 도예가로 성공한 쌍둥이 동생 서인이 어느 날 싸늘한 시신으로 발견됩니다. 경찰은 자살로 결론짓지만, 서진은 뭔가 잘못됐다는 직감을 떨치지 못하고 직접 진실을 파헤치기 시작하죠. 문제는, 그녀의 시야가 꺼져가는 것과 동시에 자신도 범인의 다음 표적이 되어간다는 겁니다.
+
+이 영화, 사실 신작이 아니라 2010년 스페인 영화 <줄리아의 눈>을 원작으로 한 리메이크예요. 원작 뼈대는 유지하면서 주변 인물 관계를 더 복잡하게 확장했고, 결정적으로 범인의 정체와 동기를 크게 바꿨다고 합니다.
+
+자, 이 영화를 이야기할 때 빼놓을 수 없는 게 배우 신민아의 1인 2역이에요. 로맨스 이미지가 워낙 강했던 배우라, 솔직히 스릴러에서 이 정도 존재감을 보여줄 거라고는 예상 못 했습니다. 특히 대사 하나 없이 오직 한쪽 눈의 초점만으로 시력이 서서히 꺼져가는 과정을 표현하는 장면이 있는데, 이 장면에서 관객 전체가 조용해지는 순간이 있어요. 시력을 잃어가면서도 빛에는 반응하는 상태를 표현하려고, 한쪽 눈은 정면을 고정하고 다른 눈만 움직이는 연습을 따로 했다고 하니, 디테일 하나는 확실히 다릅니다.
+
+연출적으로도 재미있는 지점이 있는데요, 감독이 <사이코>, <샤이닝>, 그리고 태국 영화 <셔터> 같은 고전 스릴러 걸작들을 참고했다고 밝혔습니다. 그래서인지 초자연적인 존재나 반전을 위한 반전보다는, 스토킹과 불신, 그리고 시력을 잃어간다는 공포 자체에 집중하는 결이 느껴져요. 귀신 나오는 공포영화를 기대하고 가시면 결이 좀 다르다는 점, 참고하시면 좋겠습니다.
+
+다만 냉정하게 짚을 부분도 있어요. 중반부에 다소 늘어지는 구간이 있고, 클라이맥스로 넘어가는 연결이 매끄럽지만은 않다는 평가가 있습니다. 웰메이드 완성형 스릴러라고 하기엔 개연성 면에서 아쉬운 틈이 분명 존재해요. 그럼에도 배우 한 명이 105분을 온전히 끌고 가는 힘, 그리고 시력 상실이라는 소재를 카메라 언어로 체감하게 만드는 연출은 이번 여름 극장가에서 충분히 값어치를 한다고 봅니다.
+
+정리하면, <눈동자>는 완벽한 걸작은 아니지만 배우의 존재감과 소재의 신선함만으로도 볼 이유가 충분한 영화입니다. 스릴러 좋아하시는 분들, 그리고 신민아의 다른 얼굴이 궁금하신 분들께 추천드립니다.
+
+여러분은 이 영화, 어떻게 보셨나요? 댓글로 의견 남겨주세요. 다음 리뷰에서 만나겠습니다.</textarea>
+            </div>
+
+            <div class="p-4 border border-gray-500">
+                <label class="block text-sm font-semibold text-gray-300 mb-2">
+                    TTS 엔진 선택 (TTS Engine)
+                </label>
+                <select id="engine-select" class="w-full p-2.5 bg-black border border-gray-500 text-white text-sm focus:outline-none focus:border-white">
+                    <option value="browser">브라우저 TTS (Chrome / Edge, 무료, 즉시 재생)</option>
+                    <option value="cloud">Google Gemini TTS (클라우드, Cloudflare Worker 연동, 파일 다운로드 가능)</option>
+                </select>
+            </div>
+
+            <div id="browser-panel" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-black p-5 border border-gray-500">
+                <div class="md:col-span-2">
+                    <label for="voice-select" class="block text-sm font-semibold text-gray-300 mb-1">
+                        Voice Engine (음성 엔진 선택)
+                    </label>
+                    <select id="voice-select" class="w-full p-2.5 bg-black border border-gray-500 text-white text-sm focus:outline-none focus:border-white">
+                        <option value="">Loading voices... (음성 엔진을 불러오는 중...)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label for="rate-range" class="text-sm font-semibold text-gray-300">
+                            Speed / Rate (속도)
+                        </label>
+                        <span id="rate-val" class="text-xs font-mono bg-black border border-gray-500 text-white px-2 py-0.5">1.0x</span>
+                    </div>
+                    <input type="range" id="rate-range" min="0.5" max="2.0" step="0.1" value="1.0" class="w-full h-2 bg-gray-700 border border-gray-500 appearance-none cursor-pointer">
+                    <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                        <span>Slow (느림)</span>
+                        <span>Normal (보통)</span>
+                        <span>Fast (빠름)</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label for="pitch-range" class="text-sm font-semibold text-gray-300">
+                            Pitch (음높이)
+                        </label>
+                        <span id="pitch-val" class="text-xs font-mono bg-black border border-gray-500 text-white px-2 py-0.5">1.0</span>
+                    </div>
+                    <input type="range" id="pitch-range" min="0.5" max="2.0" step="0.1" value="1.0" class="w-full h-2 bg-gray-700 border border-gray-500 appearance-none cursor-pointer">
+                    <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                        <span>Low (낮음)</span>
+                        <span>Normal (보통)</span>
+                        <span>High (높음)</span>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2">
+                    <div class="flex justify-between items-center mb-1">
+                        <label for="volume-range" class="text-sm font-semibold text-gray-300">
+                            Volume (음량)
+                        </label>
+                        <span id="volume-val" class="text-xs font-mono bg-black border border-gray-500 text-white px-2 py-0.5">100%</span>
+                    </div>
+                    <input type="range" id="volume-range" min="0" max="1" step="0.05" value="1" class="w-full h-2 bg-gray-700 border border-gray-500 appearance-none cursor-pointer">
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between bg-black border border-gray-500 px-4 py-3 text-sm">
+                <span class="font-medium text-gray-300">Player Status (재생 상태):</span>
+                <span id="status-indicator" class="font-bold text-gray-400 uppercase tracking-wider">Stopped (정지됨)</span>
+            </div>
+
+            <div class="flex flex-wrap gap-3 pt-2">
+                <button id="btn-play" class="flex-1 min-w-[120px] bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-4 border border-gray-400 transition-all duration-150 active:scale-95 flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Play (재생)
+                </button>
+                <button id="btn-pause" class="flex-1 min-w-[120px] bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-4 border border-gray-400 transition-all duration-150 active:scale-95 flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Pause (일시정지)
+                </button>
+                <button id="btn-resume" class="flex-1 min-w-[120px] bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-4 border border-gray-400 transition-all duration-150 active:scale-95 flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 15H19M9 11l3-3m0 0l3 3m-3-3v8"/></svg>
+                    Resume (다시시작)
+                </button>
+                <button id="btn-stop" class="flex-1 min-w-[120px] bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-4 border border-gray-400 transition-all duration-150 active:scale-95 flex justify-center items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1 1h4a1 1 0 011 1v4a1 1 0 01-1 1H10a1 1 0 01-1-1v-4z"/></svg>
+                    Stop (정지)
+                </button>
+            </div>
+            </div>
+
+            <div id="cloud-panel" class="space-y-6 hidden">
+                <div class="p-5 border border-gray-500 space-y-4">
+                    <div>
+                        <label for="worker-url" class="block text-sm font-semibold text-gray-300 mb-1">
+                            Cloudflare Worker 엔드포인트 URL
+                        </label>
+                        <input type="text" id="worker-url" placeholder="https://your-worker-name.your-subdomain.workers.dev" class="w-full p-2.5 bg-black border border-gray-500 text-white text-sm focus:outline-none focus:border-white">
+                        <p class="text-xs text-gray-500 mt-1">Gemini API 키는 이 화면에 입력하지 않습니다. Cloudflare Worker에 시크릿(Secret)으로 등록한 키를 서버 쪽에서만 사용합니다.</p>
+                    </div>
+
+                    <div>
+                        <label for="gemini-voice-select" class="block text-sm font-semibold text-gray-300 mb-1">
+                            Gemini Voice (음성 선택)
+                        </label>
+                        <select id="gemini-voice-select" class="w-full p-2.5 bg-black border border-gray-500 text-white text-sm focus:outline-none focus:border-white">
+                            <option value="Kore">Kore</option>
+                            <option value="Puck">Puck</option>
+                            <option value="Charon">Charon</option>
+                            <option value="Fenrir">Fenrir</option>
+                            <option value="Aoede">Aoede</option>
+                            <option value="Leda">Leda</option>
+                            <option value="Orus">Orus</option>
+                            <option value="Zephyr">Zephyr</option>
+                        </select>
+                        <p class="text-xs text-gray-500 mt-1">속도/음높이는 슬라이더 대신, 텍스트 앞에 "천천히 차분하게 말해줘:" 같은 지시문을 붙여서 조절합니다 (Gemini TTS 특성).</p>
+                    </div>
+
+                    <button id="btn-generate-cloud" class="w-full bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-4 border border-gray-400 transition-all duration-150 active:scale-95">
+                        Generate (음성 생성)
+                    </button>
+
+                    <div id="cloud-status" class="text-sm text-gray-400"></div>
+
+                    <audio id="cloud-audio" controls class="w-full hidden"></audio>
+
+                    <a id="btn-download-cloud" href="#" download="tts_output.wav" class="hidden block text-center w-full bg-black hover:bg-white hover:text-black text-white font-semibold py-3 px-4 border border-gray-400 transition-all duration-150">
+                        다운로드 (WAV 파일)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const textInput = document.getElementById('text-input');
+        const voiceSelect = document.getElementById('voice-select');
+        const rateRange = document.getElementById('rate-range');
+        const pitchRange = document.getElementById('pitch-range');
+        const volumeRange = document.getElementById('volume-range');
+        
+        const rateVal = document.getElementById('rate-val');
+        const pitchVal = document.getElementById('pitch-val');
+        const volumeVal = document.getElementById('volume-val');
+        
+        const statusIndicator = document.getElementById('status-indicator');
+        
+        const btnPlay = document.getElementById('btn-play');
+        const btnPause = document.getElementById('btn-pause');
+        const btnResume = document.getElementById('btn-resume');
+        const btnStop = document.getElementById('btn-stop');
+
+        // State variables
+        let synth = window.speechSynthesis;
+        let voices = [];
+        let sentences = [];
+        let currentSentenceIndex = 0;
+        let isPlayingFlag = false;
+
+        // Initialize voices list
+        function populateVoiceList() {
+            if (typeof synth === 'undefined') return;
+            
+            voices = synth.getVoices();
+            
+            // Priority: Korean voices first, then sort alphabetically
+            const sortedVoices = [...voices].sort((a, b) => {
+                const aKo = a.lang.includes('ko');
+                const bKo = b.lang.includes('ko');
+                if (aKo && !bKo) return -1;
+                if (!aKo && bKo) return 1;
+                return a.name.localeCompare(b.name);
+            });
+
+            voiceSelect.innerHTML = '';
+
+            // 한국어(ko) 음성과 그 외 음성을 분리
+            const koVoices = sortedVoices.filter(v => v.lang.includes('ko'));
+            const otherVoices = sortedVoices.filter(v => !v.lang.includes('ko'));
+
+            function appendVoiceOption(voice, group) {
+                const option = document.createElement('option');
+                const genderLabel = group === 'ko' ? guessKoreanVoiceGender(voice.name) : '';
+                option.textContent = `${voice.name} (${voice.lang})${genderLabel ? ' - ' + genderLabel : ''}`;
+
+                if (voice.default) {
+                    option.textContent += ' -- DEFAULT';
+                }
+
+                option.setAttribute('data-lang', voice.lang);
+                option.setAttribute('data-name', voice.name);
+                return option;
+            }
+
+            if (koVoices.length > 0) {
+                const koGroup = document.createElement('optgroup');
+                koGroup.label = '한국어 음성 (Korean Voices)';
+                koVoices.forEach(voice => koGroup.appendChild(appendVoiceOption(voice, 'ko')));
+                voiceSelect.appendChild(koGroup);
+            }
+
+            if (otherVoices.length > 0) {
+                const otherGroup = document.createElement('optgroup');
+                otherGroup.label = '기타 언어 (Other Languages)';
+                otherVoices.forEach(voice => otherGroup.appendChild(appendVoiceOption(voice, 'other')));
+                voiceSelect.appendChild(otherGroup);
+            }
+
+            // Set default voice to first Korean voice if available
+            if (koVoices.length > 0) {
+                voiceSelect.selectedIndex = 0;
+            }
+        }
+
+        // 브라우저 Web Speech API는 성별 정보를 제공하지 않으므로,
+        // 자주 쓰이는 한국어 음성 이름 패턴을 기준으로 성별을 추정합니다.
+        // 목록에 없는 음성은 '성별 미상'으로 표시됩니다.
+        function guessKoreanVoiceGender(name) {
+            const lower = name.toLowerCase();
+            const femaleHints = ['sunhi', 'heami', 'yuna', 'female', '여성'];
+            const maleHints = ['injoon', 'male', '남성'];
+
+            if (femaleHints.some(hint => lower.includes(hint))) return '여성';
+            if (maleHints.some(hint => lower.includes(hint))) return '남성';
+            return '성별 미상';
+        }
+
+        populateVoiceList();
+        if (typeof synth !== 'undefined' && synth.onvoiceschanged !== undefined) {
+            synth.onvoiceschanged = populateVoiceList;
+        }
+
+        // Live value displays for sliders
+        rateRange.addEventListener('input', () => { rateVal.textContent = `${rateRange.value}x`; });
+        pitchRange.addEventListener('input', () => { pitchVal.textContent = pitchRange.value; });
+        volumeRange.addEventListener('input', () => { volumeVal.textContent = `${Math.round(volumeRange.value * 100)}%`; });
+
+        // Helper: Sentence tokenizer to avoid Chrome's length limitation cutoff bug
+        function splitTextIntoSentences(text) {
+            // Split by sentence terminators (., ?, !) followed by whitespace or newline
+            return text
+                .split(/([.?!]+(?:\s+|\n+|$))/)
+                .reduce((acc, part, index) => {
+                    if (index % 2 === 0) {
+                        if (part.trim()) acc.push(part.trim());
+                    } else {
+                        if (acc.length > 0) acc[acc.length - 1] += part;
+                    }
+                    return acc;
+                }, [])
+                .filter(sentence => sentence.trim().length > 0);
+        }
+
+        // Main Player Engine
+        function speakSentence(index) {
+            if (!isPlayingFlag || index >= sentences.length) {
+                stopTTS();
+                return;
+            }
+
+            currentSentenceIndex = index;
+            const currentSentence = sentences[index];
+            const utterance = new SpeechSynthesisUtterance(currentSentence);
+
+            // Set selected voice
+            const selectedOption = voiceSelect.selectedOptions[0];
+            if (selectedOption) {
+                const selectedName = selectedOption.getAttribute('data-name');
+                const matchedVoice = voices.find(v => v.name === selectedName);
+                if (matchedVoice) {
+                    utterance.voice = matchedVoice;
+                }
+            }
+
+            // Set Speech Parameters
+            utterance.rate = parseFloat(rateRange.value);
+            utterance.pitch = parseFloat(pitchRange.value);
+            utterance.volume = parseFloat(volumeRange.value);
+
+            // Audio Flow Events
+            utterance.onend = () => {
+                if (isPlayingFlag) {
+                    speakSentence(currentSentenceIndex + 1);
+                }
+            };
+
+            utterance.onerror = (event) => {
+                console.error('TTS Playback Error:', event);
+                if (event.error !== 'interrupted' && isPlayingFlag) {
+                    speakSentence(currentSentenceIndex + 1);
+                }
+            };
+
+            synth.speak(utterance);
+            updateStatus('Playing (재생 중) - ' + (currentSentenceIndex + 1) + '/' + sentences.length);
+        }
+
+        function playTTS() {
+            if (synth.speaking) {
+                synth.cancel();
+            }
+
+            const rawText = textInput.value;
+            if (!rawText.trim()) {
+                alert('재생할 텍스트를 입력해주세요.');
+                return;
+            }
+
+            sentences = splitTextIntoSentences(rawText);
+            isPlayingFlag = true;
+            speakSentence(0);
+        }
+
+        function pauseTTS() {
+            if (synth.speaking && !synth.paused) {
+                synth.pause();
+                updateStatus('Paused (일시정지됨)');
+            }
+        }
+
+        function resumeTTS() {
+            if (synth.paused) {
+                synth.resume();
+                updateStatus('Playing (재생 중) - ' + (currentSentenceIndex + 1) + '/' + sentences.length);
+            }
+        }
+
+        function stopTTS() {
+            isPlayingFlag = false;
+            synth.cancel();
+            currentSentenceIndex = 0;
+            updateStatus('Stopped (정지됨)');
+        }
+
+        function updateStatus(status) {
+            statusIndicator.textContent = status;
+            if (status.includes('Playing')) {
+                statusIndicator.className = 'font-bold text-white uppercase tracking-wider animate-pulse';
+            } else if (status.includes('Paused')) {
+                statusIndicator.className = 'font-bold text-gray-300 uppercase tracking-wider';
+            } else {
+                statusIndicator.className = 'font-bold text-gray-500 uppercase tracking-wider';
+            }
+        }
+
+        // Bind Buttons
+        btnPlay.addEventListener('click', playTTS);
+        btnPause.addEventListener('click', pauseTTS);
+        btnResume.addEventListener('click', resumeTTS);
+        btnStop.addEventListener('click', stopTTS);
+
+        // --- TTS 엔진 선택 (브라우저 / Google Gemini 클라우드) ---
+        const engineSelect = document.getElementById('engine-select');
+        const browserPanel = document.getElementById('browser-panel');
+        const cloudPanel = document.getElementById('cloud-panel');
+
+        engineSelect.addEventListener('change', () => {
+            if (engineSelect.value === 'cloud') {
+                stopTTS(); // 브라우저 TTS가 재생 중이면 정지
+                browserPanel.classList.add('hidden');
+                cloudPanel.classList.remove('hidden');
+            } else {
+                browserPanel.classList.remove('hidden');
+                cloudPanel.classList.add('hidden');
+            }
+        });
+
+        // --- Google Gemini TTS (Cloudflare Worker 연동) ---
+        const workerUrlInput = document.getElementById('worker-url');
+        const geminiVoiceSelect = document.getElementById('gemini-voice-select');
+        const btnGenerateCloud = document.getElementById('btn-generate-cloud');
+        const cloudStatus = document.getElementById('cloud-status');
+        const cloudAudio = document.getElementById('cloud-audio');
+        const btnDownloadCloud = document.getElementById('btn-download-cloud');
+
+        btnGenerateCloud.addEventListener('click', async () => {
+            const workerUrl = workerUrlInput.value.trim();
+            const text = textInput.value.trim();
+            const voiceName = geminiVoiceSelect.value;
+
+            if (!workerUrl) {
+                cloudStatus.textContent = 'Worker 엔드포인트 URL을 입력해주세요.';
+                return;
+            }
+            if (!text) {
+                cloudStatus.textContent = '낭독할 텍스트를 입력해주세요.';
+                return;
+            }
+
+            btnGenerateCloud.disabled = true;
+            cloudStatus.textContent = '음성 생성 중... (Gemini TTS 호출)';
+            cloudAudio.classList.add('hidden');
+            btnDownloadCloud.classList.add('hidden');
+
+            try {
+                const response = await fetch(workerUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text, voiceName })
+                });
+
+                if (!response.ok) {
+                    let errMsg = `요청 실패 (HTTP ${response.status})`;
+                    try {
+                        const errJson = await response.json();
+                        if (errJson.error) errMsg += ` - ${errJson.error}`;
+                    } catch (_) {}
+                    throw new Error(errMsg);
+                }
+
+                const audioBlob = await response.blob();
+                const audioUrl = URL.createObjectURL(audioBlob);
+
+                cloudAudio.src = audioUrl;
+                cloudAudio.classList.remove('hidden');
+
+                btnDownloadCloud.href = audioUrl;
+                btnDownloadCloud.classList.remove('hidden');
+
+                cloudStatus.textContent = '생성 완료. 재생하거나 다운로드할 수 있습니다.';
+            } catch (err) {
+                console.error('Gemini TTS Error:', err);
+                cloudStatus.textContent = `오류: ${err.message}`;
+            } finally {
+                btnGenerateCloud.disabled = false;
+            }
+        });
+
+        // Page Unload Protection
+        window.addEventListener('beforeunload', () => {
+            synth.cancel();
+        });
+    </script>
+</body>
+</html>
