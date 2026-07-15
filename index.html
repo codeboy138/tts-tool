@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrome TTS Player - 영화 <눈동자> 리뷰</title>
+    <title>Chrome TTS Player (크롬 TTS 플레이어)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* 흑백 인트라넷 스타일 - Chrome/Edge 공통 */
@@ -24,7 +24,7 @@
     <div class="max-w-4xl mx-auto bg-black border border-gray-500">
         <div class="bg-black border-b border-gray-500 p-6 text-white">
             <h1 class="text-2xl font-bold">Chrome / Edge TTS Audio Player (TTS 오디오 플레이어)</h1>
-            <p class="text-gray-400 text-sm mt-1">Web Speech API를 이용한 고기능 텍스트 리더기</p>
+            <p class="text-gray-400 text-sm mt-1">Web Speech API를 이용한 고기능 텍스트 리더기 (High-functional text reader using Web Speech API)</p>
         </div>
 
         <div class="p-6 space-y-6">
@@ -32,21 +32,7 @@
                 <label class="block text-sm font-semibold text-gray-300 mb-2">
                     Speech Text (낭독할 텍스트)
                 </label>
-                <textarea id="text-input" rows="10" class="w-full p-4 bg-black border border-gray-500 text-white text-sm leading-relaxed resize-y focus:outline-none focus:border-white">여러분, 극장에서 옆자리 관객이 저도 모르게 낮은 탄식을 내뱉는 장면, 본 적 있으세요? 저는 이 영화에서 봤습니다. 오늘 리뷰할 영화는 개봉 3주 차에 접어들었는데도 오히려 관객수가 늘고 있는 화제작, <눈동자>입니다.
-
-먼저 간단히 줄거리부터 정리하고 갈게요. 유전병으로 서서히 시력을 잃어가는 사진작가 서진. 그런데 자신보다 먼저 시각장애를 갖고도 도예가로 성공한 쌍둥이 동생 서인이 어느 날 싸늘한 시신으로 발견됩니다. 경찰은 자살로 결론짓지만, 서진은 뭔가 잘못됐다는 직감을 떨치지 못하고 직접 진실을 파헤치기 시작하죠. 문제는, 그녀의 시야가 꺼져가는 것과 동시에 자신도 범인의 다음 표적이 되어간다는 겁니다.
-
-이 영화, 사실 신작이 아니라 2010년 스페인 영화 <줄리아의 눈>을 원작으로 한 리메이크예요. 원작 뼈대는 유지하면서 주변 인물 관계를 더 복잡하게 확장했고, 결정적으로 범인의 정체와 동기를 크게 바꿨다고 합니다.
-
-자, 이 영화를 이야기할 때 빼놓을 수 없는 게 배우 신민아의 1인 2역이에요. 로맨스 이미지가 워낙 강했던 배우라, 솔직히 스릴러에서 이 정도 존재감을 보여줄 거라고는 예상 못 했습니다. 특히 대사 하나 없이 오직 한쪽 눈의 초점만으로 시력이 서서히 꺼져가는 과정을 표현하는 장면이 있는데, 이 장면에서 관객 전체가 조용해지는 순간이 있어요. 시력을 잃어가면서도 빛에는 반응하는 상태를 표현하려고, 한쪽 눈은 정면을 고정하고 다른 눈만 움직이는 연습을 따로 했다고 하니, 디테일 하나는 확실히 다릅니다.
-
-연출적으로도 재미있는 지점이 있는데요, 감독이 <사이코>, <샤이닝>, 그리고 태국 영화 <셔터> 같은 고전 스릴러 걸작들을 참고했다고 밝혔습니다. 그래서인지 초자연적인 존재나 반전을 위한 반전보다는, 스토킹과 불신, 그리고 시력을 잃어간다는 공포 자체에 집중하는 결이 느껴져요. 귀신 나오는 공포영화를 기대하고 가시면 결이 좀 다르다는 점, 참고하시면 좋겠습니다.
-
-다만 냉정하게 짚을 부분도 있어요. 중반부에 다소 늘어지는 구간이 있고, 클라이맥스로 넘어가는 연결이 매끄럽지만은 않다는 평가가 있습니다. 웰메이드 완성형 스릴러라고 하기엔 개연성 면에서 아쉬운 틈이 분명 존재해요. 그럼에도 배우 한 명이 105분을 온전히 끌고 가는 힘, 그리고 시력 상실이라는 소재를 카메라 언어로 체감하게 만드는 연출은 이번 여름 극장가에서 충분히 값어치를 한다고 봅니다.
-
-정리하면, <눈동자>는 완벽한 걸작은 아니지만 배우의 존재감과 소재의 신선함만으로도 볼 이유가 충분한 영화입니다. 스릴러 좋아하시는 분들, 그리고 신민아의 다른 얼굴이 궁금하신 분들께 추천드립니다.
-
-여러분은 이 영화, 어떻게 보셨나요? 댓글로 의견 남겨주세요. 다음 리뷰에서 만나겠습니다.</textarea>
+                <textarea id="text-input" rows="10" placeholder="여기에 낭독할 텍스트를 입력하거나 붙여넣어 주세요. (Please enter or paste the text to be read here.)" class="w-full p-4 bg-black border border-gray-500 text-white text-sm leading-relaxed resize-y focus:outline-none focus:border-white"></textarea>
             </div>
 
             <div class="p-4 border border-gray-500">
@@ -374,6 +360,7 @@
             }
         }
 
+        // Pause play-back (재생 일시정지)
         function pauseTTS() {
             if (synth.speaking && !synth.paused) {
                 synth.pause();
@@ -381,6 +368,7 @@
             }
         }
 
+        // Resume play-back (재생 다시시작)
         function resumeTTS() {
             if (synth.paused) {
                 synth.resume();
@@ -388,6 +376,7 @@
             }
         }
 
+        // Stop play-back (재생 정지)
         function stopTTS() {
             isPlayingFlag = false;
             synth.cancel();
@@ -395,6 +384,7 @@
             updateStatus('Stopped (정지됨)');
         }
 
+        // Update indicators (상태 표시기 업데이트)
         function updateStatus(status) {
             statusIndicator.textContent = status;
             if (status.includes('Playing')) {
@@ -461,6 +451,7 @@
             return chunks;
         }
 
+        // Generate a single audio chunk via cloud (클라우드를 통한 단일 오디오 청크 생성)
         async function generateOneChunk(workerUrl, text, voiceName) {
             const response = await fetch(workerUrl, {
                 method: 'POST',
@@ -480,6 +471,7 @@
             return await response.blob();
         }
 
+        // Create table row for results (결과 행 생성)
         function addResultRow(index, total) {
             const row = document.createElement('div');
             row.className = 'border border-gray-500 p-3 space-y-2';
@@ -490,6 +482,7 @@
             return row;
         }
 
+        // Update row on successful generation (생성 성공 시 결과 행 채우기)
         function fillResultRow(row, index, blobUrl, filename) {
             row.innerHTML = `
                 <div class="text-xs text-gray-400">${filename}</div>
@@ -500,6 +493,7 @@
             `;
         }
 
+        // Update row on generation failure (생성 실패 시 에러 행 처리)
         function failResultRow(row, index, message) {
             row.innerHTML = `
                 <div class="text-xs text-red-400">파일 ${index} 생성 실패: ${message}</div>
