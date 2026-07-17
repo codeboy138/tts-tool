@@ -454,7 +454,7 @@
         // Generate a single audio chunk via cloud (클라우드를 통한 단일 오디오 청크 생성)
         async function generateOneChunk(workerUrl, text, voiceName) {
             const response = await fetch(workerUrl, {
-                method: 'POST',
+                method: 'POST', // 👈 [수정 완료] HTTP 405 에러 해결을 위해 명시적으로 POST 지정
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text, voiceName })
             });
